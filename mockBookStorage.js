@@ -13,6 +13,10 @@ class MockBookStorage {
         return this.books;
     }
 
+    findBooks(bookName){
+
+    }
+
     insertBook(book) {
         const bookToInsert = Object.assign({},book)
         const bookFromArray =_.find(this.books, book )

@@ -25,10 +25,22 @@ class BookStorage {
         });
     }
 
+    async findBooks(bookName){
+        const books = wait this.BookModel.find({'name' : bookName});
+        return books.map((book) => {
+                return {
+                    'name' : book.name,
+                    'author' : book.author,
+                    'count' : book.count
+                }
+            });
+    }
+
     async insertBook(book){
         const bookToInsert = Object.assign({},book);
         const bookFromDb = await this.BookModel.findOne(book);
-
+        console.log(book);
+        console.log(bookFromDb);
         if(!bookFromDb){
             bookToInsert.count = 1;
             const newBook = new this.BookModel(bookToInsert);
@@ -54,8 +66,8 @@ class BookStorage {
     }
     //for tests
     async clearCollection(){
-    await this.BookModel.remove({});
-}
+        await this.BookModel.remove({});
+    }
 
 }
 
